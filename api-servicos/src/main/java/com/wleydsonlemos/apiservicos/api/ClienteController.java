@@ -1,12 +1,16 @@
 package com.wleydsonlemos.apiservicos.api;
 
+import com.wleydsonlemos.apiservicos.api.dto.ClienteDTO;
+import com.wleydsonlemos.apiservicos.api.dto.ClienteInputDTO;
 import com.wleydsonlemos.apiservicos.model.Cliente;
 import com.wleydsonlemos.apiservicos.repository.ClienteRepository;
 import com.wleydsonlemos.apiservicos.repository.ServicosRepository;
 import com.wleydsonlemos.apiservicos.service.ClienteService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,22 +22,22 @@ public class ClienteController {
     private ClienteService service;
 
     @GetMapping
-    public List<Cliente> buscarTodos(){
+    public List<ClienteDTO> buscarTodos(){
         return service.buscarTodos();
     }
 
     @GetMapping("/{id}")
-    public Cliente buscarPorId(@PathVariable Long id) throws Exception {
+    public ClienteDTO buscarPorId(@PathVariable Long id) throws Exception {
         return service.buscarPorId(id);
     }
 
     @PostMapping
-    public Cliente criarCliente(@RequestBody Cliente cliente){
+    public ClienteDTO criarCliente(@RequestBody @Valid ClienteInputDTO cliente){
         return service.salvarCliente(cliente);
     }
 
     @PutMapping("/{id}")
-    public Cliente atualizarCliente(@RequestBody Cliente cliente, @PathVariable Long id){
+    public ClienteDTO atualizarCliente(@RequestBody Cliente cliente, @PathVariable Long id){
         return service.atualizarCliente(cliente, id);
     }
 
@@ -43,7 +47,7 @@ public class ClienteController {
     }
 
     @PatchMapping("/{id}/desativar")
-    public Cliente desativarCliente(@PathVariable Long id){
+    public ClienteDTO desativarCliente(@PathVariable Long id){
         return service.desativarCliente(id);
     }
 
