@@ -1,4 +1,4 @@
-package com.wleydsonlemos.apiservicos.api;
+package com.wleydsonlemos.apiservicos.api.controller;
 
 import com.wleydsonlemos.apiservicos.api.dto.ClienteDTO;
 import com.wleydsonlemos.apiservicos.api.dto.ClienteInputDTO;
@@ -29,7 +29,7 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     @ApiOperation("Buscar um cliente por id")
-    public ClienteDTO buscarPorId(@PathVariable Long id) throws Exception {
+    public ClienteDTO buscarPorId(@PathVariable Long id){
         return service.buscarPorId(id);
     }
 

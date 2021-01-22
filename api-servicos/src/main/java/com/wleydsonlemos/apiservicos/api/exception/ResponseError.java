@@ -1,6 +1,7 @@
-package com.wleydsonlemos.apiservicos.api.model.exception;
+package com.wleydsonlemos.apiservicos.api.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.wleydsonlemos.apiservicos.api.exception.FieldsError;
 import lombok.Builder;
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.wleydsonlemos.apiservicos.api.model.exception;
+package com.wleydsonlemos.apiservicos.api.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

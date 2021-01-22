@@ -6,7 +6,9 @@ import com.wleydsonlemos.apiservicos.model.Cliente;
 import com.wleydsonlemos.apiservicos.repository.ClienteRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,12 +25,9 @@ public class ClienteService {
         return clienteRepository.findAll().stream().map(x -> convertDTO(x)).collect(Collectors.toList());
     }
 
-    public ClienteDTO buscarPorId(Long id) throws Exception {
+    public ClienteDTO buscarPorId(Long id){
         Cliente cliente = buscarCliente(id);
-        if (cliente != null)
-            return convertDTO(cliente);
-
-        throw new Exception();
+        return convertDTO(cliente);
     }
 
     public ClienteDTO salvarCliente(ClienteInputDTO clienteInputDTO) {
@@ -57,11 +56,10 @@ public class ClienteService {
 
     private Cliente buscarCliente(Long id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
-
         if(cliente.isPresent()){
             return cliente.get();
         }
-        return null;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado");
     }
 
     public ClienteDTO convertDTO(Cliente cliente){
